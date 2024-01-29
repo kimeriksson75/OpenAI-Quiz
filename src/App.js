@@ -1,24 +1,22 @@
-import logo from './logo.svg';
 import './App.css';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import socketIO from 'socket.io-client';
+import Home from './views/Home';
+import QuizView from './views/QuizView';
+const apiURL = process.env.REACT_APP_API_BASE_URL;
+console.log('apiURL', apiURL);
+const socket = socketIO.connect(apiURL);
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <BrowserRouter>
+    <div>
+      <Routes>
+        <Route path="/" element={<Home socket={socket} />}></Route>
+        <Route path="/quiz/" element={<QuizView socket={socket} />}></Route>
+      </Routes>
     </div>
+  </BrowserRouter>
   );
 }
 

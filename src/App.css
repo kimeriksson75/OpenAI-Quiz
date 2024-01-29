@@ -1,38 +1,88 @@
 .App {
   text-align: center;
 }
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 100;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.7);
 }
+.modal-dialog {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
+  width: 100%;
+  max-width: 500px;
+  background-color: white;
+  padding: 50px;
+  border: 1px solid gray;
+  border-radius: 12px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+.quiz {
+  button {
+    margin-top: 20px;
+    padding: 10px;
+    width: 100%;
+    font-size: 16px;
+    cursor: pointer;
+    outline: none;
+    border: none;
+    border-radius: 5px;
+    background-color: white;
+    color: black;
+    border: 1px solid black;
+    transition: all 0.3s ease-in-out;
+
+
   }
+  button:active {
+    background-color: black;
+    color: white;
+    border: 1px solid black;
+    
+  }
+  /* @media (hover: hover) and (pointer: fine) {
+    button:hover {
+      background-color: white;
+      color: black;
+      border: 1px solid black;
+    }
+  } */
+
+  .button-disabled {
+    cursor: not-allowed;
+    pointer-events: none;
+    
+  }
+  .button-correct {
+    background-color: green;
+    color: white;
+    border: 1px solid green;
+
+  }
+
+  .button-wrong {
+    background-color: red;
+    color: white;
+    border: 1px solid red;
+
+  }
+
+  
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.quiz-form {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+  margin: 0 auto;
+  width: 100%;
+  max-width: 500px;
+  border-radius: 5px;
+  background-color: white;
 }

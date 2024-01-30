@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-const QuizFooter = ({ socket }) => {
+const ChatFooter = ({ socket, typingStatus }) => {
     const [message, setMessage] = useState("")
     const handleTyping = () => socket.emit("typing",`${localStorage.getItem("userName")} is typing`)
 
@@ -22,7 +22,10 @@ const QuizFooter = ({ socket }) => {
         setMessage("")
     }
   return (
-    <div className='chat__footer'>
+      <div className='chat__footer'>
+          <div className='message__status'>
+				<p>{typingStatus}</p>
+			</div>
         <form className='form' onSubmit={handleSendMessage}>
           <input 
             type="text" 
@@ -38,4 +41,4 @@ const QuizFooter = ({ socket }) => {
   )
 };
 
-export default QuizFooter;
+export default ChatFooter;

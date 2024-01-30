@@ -2,7 +2,7 @@ import React, { useRef, useEffect, useState } from 'react';
 import Quiz from '../components/Quiz';
 import QuizBar from '../components/QuizBar';
 import QuizHeader from '../components/QuizHeader';
-import QuizFooter from '../components/QuizFooter';
+import ChatFooter from '../components/ChatFooter';
 import Chat from '../components/Chat';
 
 const QuizView = (props) => {
@@ -110,11 +110,9 @@ const QuizView = (props) => {
 				<QuizHeader onInitQuiz={onInitQuiz}/>
 				<Chat
 					messages={messages}
-					typingStatus={typingStatus}
 					lastMessageRef={lastMessageRef}
-					onInitQuiz={onInitQuiz}
 					/>
-				<QuizFooter socket={socket} />
+				<ChatFooter typingStatus={typingStatus} socket={socket} />
 			</div>
 					
 		</div>

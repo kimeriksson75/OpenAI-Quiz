@@ -13,11 +13,10 @@ const Quiz = (props) => {
 		setAnswers([...answers, answer]);
 		if (answer === quiz[round].correctAnswer) {
 				
-					console.log('correct answer');
-					// socket.emit('correctAnswer', { answer });
-			}
+				console.log('correct answer');
+		}
 		console.log('answers', answers);
-		await new Promise((resolve, reject) => setTimeout(resolve, 3000));
+		await new Promise((resolve, reject) => setTimeout(resolve, 2000));
 		if (round < quiz.length - 1) {
 			setRound(round + 1);
 			setUserAnswer(null);
@@ -38,18 +37,17 @@ const Quiz = (props) => {
 				return acc;
 			}, { correctAnswers: 0 });
 			onQuizFinished(quizResult)
-			
+			setRound(0);
+			setAnswers([]);
 
 		}
 		return () => {
 			setFinished(false);
+			setRound(0);
 		}
-	},[finished, answers]);
+	},[finished]);
 	
 	const renderClassName = useCallback((answer) => {
-		console.log('answer', answer);
-		console.log('userAnswer', userAnswer);
-		console.log('quiz[round].correctAnswer', quiz[round].correctAnswer);
 		if (userAnswer === null) {
 			return '';
 		}

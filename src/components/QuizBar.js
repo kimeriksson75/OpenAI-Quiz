@@ -9,24 +9,23 @@ const QuizBar = ({ socket, quiz }) => {
 		}, [socket, users]);
 	
 	const renderUser = (user) => <li>
-			<div className="chat__user">
-			<img
-				alt='user avatar'
-				className="chat__user-image"
-				src={`https://i.pravatar.cc/150?u=${user.socketID}`} />
+			<div className="user">
+				<img
+					alt='user avatar'
+					className="user-image"
+					src={`https://i.pravatar.cc/150?u=${user.socketID}`} />
 				<span>{user.userName}</span>
 			</div>
 		</li> 
     return (
-			<div className='chat__sidebar'>
-			<h2>Quiz time</h2>
-			<div>
-					<h4  className='chat__header'>Kompisar</h4>
-					<ul className='chat__users'>
-							{users.map(user => renderUser(user))}
-					</ul>
+			<div className='quiz-bar'>
+				<h1>Quiz</h1>
+				<div className="users-list">
+						<ul className='users'>
+								{users.map(user => renderUser(user))}
+						</ul>
+				</div>
 			</div>
-</div>
     );
 }
 

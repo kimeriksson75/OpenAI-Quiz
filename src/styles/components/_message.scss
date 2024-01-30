@@ -1,0 +1,47 @@
+.message__container {
+	width: 100%;
+	height: 100%;
+	background-color: #fff;
+	padding: 20px;
+	overflow-y: scroll;
+	border: 1px dotted gray;
+}
+
+.message__container > * {
+	margin-bottom: 10px;
+}
+
+.message__recipient {
+	background-color: #f5ccc2;
+	max-width: 300px;
+	padding: 12px;
+	border-radius: 10px;
+	font-size: 15px;
+}
+.message__sender {
+	background-color: rgb(194, 243, 194);
+	max-width: 300px;
+	padding: 12px;
+	border-radius: 10px;
+	margin-left: auto;
+	font-size: 15px;
+}
+.message__chats > p {
+	font-size: 15px;
+	font-weight: bold;
+}
+.recipient__name {
+	text-align: left;
+	margin: 0 0 4px 8px;
+}
+.sender__name {
+	text-align: right;
+	margin: 0 8px 4px 0;
+
+}
+.message__status {
+	position: fixed;
+	bottom: 72px;
+	font-size: 15px;
+	font-style: italic;
+}

@@ -1,0 +1,25 @@
+.button-submit,
+.button-primary,
+.button-secondary {
+  background-color: #00e;
+  padding: 12px 24px;
+  border: none;
+  outline: none;
+  color: #eae3d2;
+  cursor: pointer;
+  font-size: 14px;
+	font-weight: bold;
+}
+.button-primary:hover,
+.button-submit:hover {
+  background-color: #00e;
+}
+
+.button-secondary {
+  background-color: #d1512d;
+}
+
+.button-group {
+	display: flex;
+	gap: 12px;
+}

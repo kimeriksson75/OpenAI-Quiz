@@ -72,7 +72,7 @@ const Quiz = (props) => {
     return (
         <div className="modal">
             <div className="modal-dialog">
-					<div className="quiz">
+					<div className="quiz-component">
 						<h2>{ `Quiz kategori ${quiz[0]?.category}`}</h2>
 						<h3>{`Runda ${round+1} av ${quiz.length}`}</h3>
 						

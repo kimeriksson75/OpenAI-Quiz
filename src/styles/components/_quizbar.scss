@@ -1,0 +1,52 @@
+.quiz-bar {
+	height: 100%;
+	flex: 0.2;
+	padding: 12px;
+	overflow-y: scroll;
+	max-width: 160px;
+	@media screen and (max-width: 768px){
+		width: 60px;
+	}
+}
+.users-list {
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+	margin-top: 12px;
+	
+	h4 {
+		margin: 12px 0;
+	}
+}
+.users > * {
+	margin-bottom: 10px;
+	color: #607eaa;
+	font-size: 14px;
+}
+.user {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	gap: 8px;
+	padding: 16px;
+	cursor: pointer;
+	transition: all 0.3s ease-in-out;
+	border: 1px dotted gray;
+	color: black;
+
+	@media screen and (max-width: 768px){
+		padding: 12px;
+
+	}
+}
+.user-image {
+	width: 60px;
+	height: 60px;
+	object-fit: cover;
+
+	@media screen and (max-width: 768px){
+		width: 40px;
+		height: 40px;
+	}
+}

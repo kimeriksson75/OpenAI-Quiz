@@ -1,8 +1,9 @@
-import './App.css';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import socketIO from 'socket.io-client';
 import Home from './views/Home';
-import QuizView from './views/QuizView';
+import QuizView from './views/Quiz';
+import './styles/main.scss';
+
 const apiURL = process.env.REACT_APP_API_BASE_URL;
 console.log('apiURL', apiURL);
 const socket = socketIO.connect(apiURL);

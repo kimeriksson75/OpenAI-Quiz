@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useFetch } from '../hooks/useFetch'; 
-import '../App.css';
 
 const Home = ({ socket }) => {
   const navigate = useNavigate();
@@ -32,8 +31,7 @@ const Home = ({ socket }) => {
   return (
     <div className="home">
       <div className="home-login-form">
-        <h2 className="">Välkommen!</h2>
-        <p className="home__text">Vad heter du?</p>
+        <h2 className="">Hej,</h2>
         <form onSubmit={handleSubmit}>
           <input
             placeholder='Ditt namn'

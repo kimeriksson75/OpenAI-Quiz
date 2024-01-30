@@ -1,10 +1,10 @@
-import React, { useRef, useEffect, useState, useCallback } from 'react';
+import React, { useRef, useEffect, useState } from 'react';
 import Quiz from '../components/Quiz';
 import QuizBar from '../components/QuizBar';
 import QuizHeader from '../components/QuizHeader';
 import QuizFooter from '../components/QuizFooter';
 import Chat from '../components/Chat';
-import { useFetch } from '../hooks/useFetch';
+
 const QuizView = (props) => {
 	const { socket } = props;
 	// const { category = 'movies'} = props?.match?.params || null;
@@ -98,7 +98,7 @@ const QuizView = (props) => {
 
 	
 	return (
-		<div className="chat">
+		<div className="quiz">
 			<QuizBar socket={socket} />
 			{/* <Quiz socket={socket} /> */}
 			{quizData.length > 0 ?
@@ -106,7 +106,7 @@ const QuizView = (props) => {
 					onQuizFinished={onQuizFinished}
 					socket={socket}
 					quiz={quizData} /> : null}
-			<div className="chat__main">
+			<div className="quiz-main">
 				<QuizHeader onInitQuiz={onInitQuiz}/>
 				<Chat
 					messages={messages}

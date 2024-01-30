@@ -32,7 +32,7 @@ const QuizFooter = ({ socket }) => {
             onChange={e => setMessage(e.target.value)}
             onKeyDown={handleTyping}
             />
-            <button className="button-submit">Kör</button>
+            <button className="button-submit">Surra</button>
         </form>
      </div>
   )

@@ -1,0 +1,104 @@
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+   
+
+}
+
+#root {
+	display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+body {
+	font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+	'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+	sans-serif;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+@media screen and (-webkit-min-device-pixel-ratio:0) { 
+  select,
+  textarea,
+  input {
+    font-size: 16px;
+  }
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: 'Courier New,Courier,Lucida Sans Typewriter,Lucida Typewriter,monospace';
+}
+h1,h2,h3,h4,h5,h6 {
+	font-family: 'Arial';
+	line-height: 1.25;
+	font-weight: 700;
+	color: #00e;
+}
+ul,
+li {
+  list-style: none;
+}
+// p {
+//     font-size: 1.2rem;
+//     font-weight: 500;
+// }
+// a {
+//     text-decoration: none;
+//     color: var(--light);
+// }
+// a:hover {
+//     color: var(--gray-dark);
+// }
+// ul {
+//     list-style: none;
+// }
+// form .field > label {
+//     color: var(--light)!important;
+// }
+// form .field > select,
+// form .field > input {
+    
+//     background-color: var(--dark)!important;
+//     color: var(--light)!important;
+
+//     body.dark & {
+//         background-color: var(--gray)!important;
+//         color: var(--gray-dark)!important;
+//     }
+// }
+// form {
+//     .error {
+//         input {
+//             border-color: var(--orange)!important;
+//             color: var(--dark)!important;
+//             body.dark & {
+//                 background-color: var(--gray)!important;
+//                 color: var(--gray-dark)!important;
+//             }
+//         }
+//         .error {
+//             background-color: var(--orange)!important;
+//             color: var(--light)!important;
+//             body.dark & {
+//                 background-color: var(--gray)!important;
+//                 color: var(--gray-dark)!important;
+//             }
+//         }
+//     }
+// }
+// form .fields.error .field textarea {
+//     border-color: var(--orange)!important;
+// }

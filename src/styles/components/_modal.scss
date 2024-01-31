@@ -25,3 +25,21 @@
 	transition: all 0.3s ease-in-out;
 
 }
+// animate modal
+@keyframes modal-animation {
+	0% {
+		transform: translate(-50%, -50%);
+		transform: scale(0);
+
+	}
+	80% {
+		transform: translate(-50%, -50%);
+		transform: scale(1.1);
+
+	}
+	100% {
+		transform: translate(-50%, -50%);
+		transform: scale(1);
+
+	}
+}

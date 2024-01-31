@@ -23,6 +23,7 @@
 	padding: 12px;
 	// border-radius: 10px;
 	font-size: 15px;
+	animation: chat-bubble-animation 0.2s ease-out;
 }
 .message__sender {
 	// background-color: rgb(194, 243, 194);
@@ -33,6 +34,7 @@
 	// border-radius: 10px;
 	margin-left: auto;
 	font-size: 15px;
+	animation: chat-bubble-animation 0.2s ease-out;
 }
 .message__chats > p {
 	font-size: 15px;
@@ -46,4 +48,17 @@
 	text-align: right;
 	margin: 0 12px 4px 0;
 
+}
+
+// animate chat bubble
+@keyframes chat-bubble-animation {
+	0% {
+		transform: scale(0);
+	}
+	80% {
+		transform: scale(1.1);
+	}
+	100% {
+		transform: scale(1);
+	}
 }

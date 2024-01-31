@@ -4,6 +4,11 @@ import QuizBar from '../components/QuizBar';
 import QuizHeader from '../components/QuizHeader';
 import ChatFooter from '../components/ChatFooter';
 import Chat from '../components/Chat';
+import useAudio from '../hooks/useAudio';
+
+const sendMessageSoundFile = require("../assets/sounds/chat-pop.mp3");
+const receivedMessageSoundFile = require("../assets/sounds/chat-received-pop.mp3");
+const newQuizSoundFile = require("../assets/sounds/new-quiz.mp3");
 
 const QuizView = (props) => {
 	const { socket } = props;
@@ -14,8 +19,14 @@ const QuizView = (props) => {
 	const [quizData, setQuizData] = useState([]);
 	const latestResponse = useRef(false);
 	const initiateQuiz = useRef(false);
+	
+	const sendMessageSoundRef = useRef(null);
+	const receivedMessageSoundRef = useRef(null);
+	const newQuizSoundRef = useRef(null);
+	const { audio: sendMessageSound } = useAudio(sendMessageSoundFile, sendMessageSoundRef);
+	const { audio: receiveMessageSound } = useAudio(receivedMessageSoundFile, receivedMessageSoundRef);
+	const { audio: newQuizSound } = useAudio(newQuizSoundFile, newQuizSoundRef);
 
-		
 	const onInitQuiz = () => {
 		console.log("onInitQuiz");
 		socket.emit("message", {
@@ -28,6 +39,16 @@ const QuizView = (props) => {
 			}
 		)
 	}
+
+	useEffect(() => {
+		socket.on('newQuiz', (data) => {
+			console.log('newQuiz', data);
+			setQuizData(data.quiz);
+			if (newQuizSound.current) {
+				newQuizSound.current.play();
+			}
+		});
+	}, [socket, newQuizSound]);
 
 	const onQuizFinished = (result) => {
 		console.log("onQuizFinished");
@@ -60,9 +81,11 @@ const QuizView = (props) => {
 				return
 			}
 			latestResponse.current = data;
-
-			console.log(`messageResponse`, data);
-			
+			if (sendMessageSound.current && receiveMessageSound.current) {
+				data.name === localStorage.getItem("userName") ?
+				sendMessageSound.current.play() :
+				receiveMessageSound.current.play();
+			}
 			if (initiateQuiz.current === true) {
 				const { text } = data;
 				socket.emit('initiateQuiz', { text });
@@ -78,18 +101,13 @@ const QuizView = (props) => {
 
 	})
 
-	}, [socket, messages])
+	}, [socket, messages, sendMessageSound, receiveMessageSound])
 
 	useEffect(()=> {
 	socket.on("typingResponse", data => setTypingStatus(data))
 	}, [socket])
 
-	useEffect(() => {
-		socket.on('newQuiz', (data) => {
-			console.log('newQuiz', data);
-			setQuizData(data.quiz);
-		});
-	}, [socket]);
+	
 
 	useEffect(() => {
 	// 👇️ scroll to bottom every time messages change

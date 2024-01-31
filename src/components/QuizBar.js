@@ -1,12 +1,19 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
+import useAudio from '../hooks/useAudio';
 
-const QuizBar = ({ socket, quiz }) => {
-    const [users, setUsers] = useState([]);
+const QuizBar = ({ socket }) => {
+	const [users, setUsers] = useState([]);
+	const newUserSoundFile = require("../assets/sounds/chat-new-user.mp3");
 
+	const newUserSoundRef = useRef(null);
+	const { audio: newUserSound } = useAudio(newUserSoundFile, newUserSoundRef);
     useEffect(() => {
 			socket.on('newUserResponse', (data) => setUsers(data));
+			if (newUserSound.current) {
+				newUserSound.current.play();
+			}
 			
-		}, [socket, users]);
+		}, [socket, users, newUserSound]);
 	
 	const renderUser = (user) => <li>
 			<div className="user">

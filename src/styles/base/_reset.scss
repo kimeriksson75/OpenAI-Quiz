@@ -44,12 +44,22 @@ code {
 h1,h2,h3,h4,h5,h6 {
 	font-family: 'Arial';
 	line-height: 1.25;
-	font-weight: 700;
+	// font-weight: 700;
 	color: #00e;
+}
+h2,h3,h4,h5,h6 {
+	color: rgb(43, 43, 43);
 }
 ul,
 li {
   list-style: none;
+}
+
+.divider {
+	width: 100%;
+	height: 1px;
+	border-bottom: 1px dotted gray;
+	margin: 10px 0;
 }
 // p {
 //     font-size: 1.2rem;

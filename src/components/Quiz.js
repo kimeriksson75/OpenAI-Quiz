@@ -71,9 +71,11 @@ const Quiz = (props) => {
         <div className="modal">
             <div className="modal-dialog">
 					<div className="quiz-component">
-						<h2>{ `Quiz kategori ${quiz[0]?.category}`}</h2>
-						<h3>{`Runda ${round+1} av ${quiz.length}`}</h3>
-						
+						<h1>Quiz</h1>
+						<h3>{ `${quiz[0]?.category}`}</h3>
+						<p>{`runda ${round+1}/${quiz.length}`}</p>
+						<div className="divider"></div>
+
                 <p>{quiz[round].question}</p>
                 <ul>
 

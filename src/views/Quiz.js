@@ -28,12 +28,11 @@ const QuizView = (props) => {
 	const { audio: newQuizSound } = useAudio(newQuizSoundFile, newQuizSoundRef);
 
 	const onInitQuiz = () => {
-		console.log("onInitQuiz");
 		socket.emit("message", {
-				text: "Så ni är redo att quizza? Vilken kategori vill ni köra?", 
+				text: `Så ni är redo att quizza? Vilken kategori vill du köra på ${localStorage.getItem("userName")}?`, 
 				name: "Quizmaestro", 
-				id: `${Math.random()}`,
-				socketID: `${Math.random()}`,
+				id: `${socket.id}${Math.random()}`,
+				socketID: socket.id,
 				role: "admin",
 				type: "initiateQuiz",
 			}
@@ -42,7 +41,6 @@ const QuizView = (props) => {
 
 	useEffect(() => {
 		socket.on('newQuiz', (data) => {
-			console.log('newQuiz', data);
 			setQuizData(data.quiz);
 			if (newQuizSound.current) {
 				newQuizSound.current.play();
@@ -63,16 +61,6 @@ const QuizView = (props) => {
 			role: "user",
 			type: "result",
 		})
-
-		// socket.emit("message", {
-		// 		text: "Bra jobbat! Vill ni köra en till?", 
-		// 		name: "Quizmaestro", 
-		// 		id: `${Math.random()}`,
-		// 		socketID: `${Math.random()}`,
-		// 		role: "admin",
-		// 		type: "message",
-		// 	}
-		// )
 	}
 	useEffect(() => {
 		socket.on("messageResponse", data => {
@@ -86,15 +74,7 @@ const QuizView = (props) => {
 				sendMessageSound.current.play() :
 				receiveMessageSound.current.play();
 			}
-			if (initiateQuiz.current === true) {
-				const { text } = data;
-				socket.emit('initiateQuiz', { text });
-				setQuizData([]);
-				initiateQuiz.current = false;
-			}
-			if (initiateQuiz.current === false && data.role === "admin" && data.type === "initiateQuiz") {
-				initiateQuiz.current = true;
-			}
+			
 			return () => {
 				socket.off("messageResponse")
 			}

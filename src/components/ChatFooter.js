@@ -23,9 +23,12 @@ const ChatFooter = ({ socket, typingStatus }) => {
     }
   return (
       <div className='chat__footer'>
-          <div className='message__status'>
-				<p>{typingStatus}</p>
-			</div>
+          {typingStatus && (
+              <div className='message__status'>
+              <p>{typingStatus}</p>
+          </div>
+          )}
+          
         <form className='form' onSubmit={handleSendMessage}>
           <input 
             type="text" 

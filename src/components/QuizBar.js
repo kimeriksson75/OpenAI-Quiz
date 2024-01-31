@@ -15,7 +15,7 @@ const QuizBar = ({ socket }) => {
 			
 		}, [socket, users, newUserSound]);
 	
-	const renderUser = (user) => <li>
+	const renderUser = (user, i) => <li key={`user-${i}`}>
 			<div className="user">
 				<img
 					alt='user avatar'
@@ -29,7 +29,7 @@ const QuizBar = ({ socket }) => {
 				<h1>Quiz</h1>
 				<div className="users-list">
 						<ul className='users'>
-								{users.map(user => renderUser(user))}
+								{users.map((user, i) => renderUser(user, i))}
 						</ul>
 				</div>
 			</div>

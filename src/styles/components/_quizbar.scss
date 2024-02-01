@@ -7,6 +7,10 @@
 	@media screen and (max-width: 768px){
 		width: 60px;
 	}
+
+	h1 {
+		text-align: center;
+	}
 }
 .users-list {
 	display: flex;
@@ -19,7 +23,7 @@
 	}
 
 	@media screen and (max-width: 520px){
-		margin-top: 14px;
+		margin-top: 46px;
 	}
 }
 .users > * {

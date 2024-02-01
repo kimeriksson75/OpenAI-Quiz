@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-const ChatFooter = ({ socket, typingStatus }) => {
+const ChatFooter = ({ socket, typingStatus, room }) => {
     const [message, setMessage] = useState("")
     const handleTyping = () => socket.emit("typing",`${localStorage.getItem("userName")} is typing`)
 
@@ -16,6 +16,7 @@ const ChatFooter = ({ socket, typingStatus }) => {
                 socketID: socket.id,
                 role: "user",
                 type: "message",
+                room,
             }
         )
         }

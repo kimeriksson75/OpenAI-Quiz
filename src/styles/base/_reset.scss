@@ -54,7 +54,10 @@ ul,
 li {
   list-style: none;
 }
-
+label {
+	font-size: 14px;
+	padding-left: 8px;
+}
 .divider {
 	width: 100%;
 	height: 1px;

@@ -13,7 +13,8 @@ function App() {
     <div>
       <Routes>
         <Route path="/" element={<Home socket={socket} />}></Route>
-        <Route path="/quiz/" element={<QuizView socket={socket} />}></Route>
+        <Route path="/:room" element={<Home socket={socket} />}></Route>
+        <Route path="/quiz/:room" element={<QuizView socket={socket} />}></Route>
       </Routes>
     </div>
   </BrowserRouter>

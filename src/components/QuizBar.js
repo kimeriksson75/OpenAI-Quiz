@@ -21,7 +21,7 @@ const QuizBar = ({ socket }) => {
 					alt='user avatar'
 					className="user-image"
 					src={`https://i.pravatar.cc/150?u=${user.socketID}`} />
-				<span>{user.userName}</span>
+				<span>{user.name}</span>
 			</div>
 		</li> 
     return (

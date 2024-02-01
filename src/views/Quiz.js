@@ -1,4 +1,5 @@
 import React, { useRef, useEffect, useState } from 'react';
+import { useParams, useNavigate } from 'react-router-dom';
 import Quiz from '../components/Quiz';
 import QuizBar from '../components/QuizBar';
 import QuizHeader from '../components/QuizHeader';
@@ -12,14 +13,15 @@ const newQuizSoundFile = require("../assets/sounds/new-quiz.mp3");
 
 const QuizView = (props) => {
 	const { socket } = props;
-	// const { category = 'movies'} = props?.match?.params || null;
+	const { room } = useParams();
 	const [messages, setMessages] = useState([]);
 	const [typingStatus, setTypingStatus] = useState('');
 	const lastMessageRef = useRef(null);
 	const [quizData, setQuizData] = useState([]);
 	const latestResponse = useRef(false);
 	const initiateQuiz = useRef(false);
-	
+	const navigate = useNavigate();
+
 	const sendMessageSoundRef = useRef(null);
 	const receivedMessageSoundRef = useRef(null);
 	const newQuizSoundRef = useRef(null);
@@ -35,9 +37,32 @@ const QuizView = (props) => {
 				socketID: socket.id,
 				role: "admin",
 				type: "initiateQuiz",
+				room,
 			}
 		)
 	}
+
+	const handleLeaveChat = () => {
+		socket.emit("message", {
+			text: `Skjuter ut mig, hörs vi 🌴`, 
+			name: localStorage.getItem("userName"), 
+			id: `${socket.id}${Math.random()}`,
+			socketID: socket.id,
+			role: "user",
+			type: "message",
+			room,
+		})
+		socket.emit('leave', {
+			name: localStorage.getItem("userName"),
+			socketID: socket.id,
+			room
+		});
+
+		localStorage.removeItem('userName');
+    navigate(`/${room}`);
+    window.location.reload();
+  };
+	
 
 	useEffect(() => {
 		socket.on('newQuiz', (data) => {
@@ -60,6 +85,7 @@ const QuizView = (props) => {
 			socketID: socket.id,
 			role: "user",
 			type: "result",
+			room,
 		})
 	}
 	useEffect(() => {
@@ -105,12 +131,20 @@ const QuizView = (props) => {
 					socket={socket}
 					quiz={quizData} /> : null}
 			<div className="quiz-main">
-				<QuizHeader onInitQuiz={onInitQuiz}/>
+				<QuizHeader
+					onInitQuiz={onInitQuiz}
+					handleLeaveChat={handleLeaveChat}
+					room={room}
+				/>
 				<Chat
 					messages={messages}
 					lastMessageRef={lastMessageRef}
 					/>
-				<ChatFooter typingStatus={typingStatus} socket={socket} />
+				<ChatFooter
+					typingStatus={typingStatus}
+					socket={socket}
+					room={room}
+				/>
 			</div>
 					
 		</div>

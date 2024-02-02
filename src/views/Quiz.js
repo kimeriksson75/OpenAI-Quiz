@@ -123,7 +123,10 @@ const QuizView = (props) => {
 	
 	return (
 		<div className="quiz">
-			<QuizBar socket={socket} />
+			<QuizBar
+				socket={socket}
+				room={room}
+			/>
 			{/* <Quiz socket={socket} /> */}
 			{quizData.length > 0 ?
 				<Quiz

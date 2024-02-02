@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
+import User from './User';
 import useAudio from '../hooks/useAudio';
-
-const QuizBar = ({ socket }) => {
+const QuizBar = ({ socket, room }) => {
 	const [users, setUsers] = useState([]);
 	const newUserSoundFile = require("../assets/sounds/chat-new-user.mp3");
 
@@ -15,21 +15,13 @@ const QuizBar = ({ socket }) => {
 			
 		}, [socket, users, newUserSound]);
 	
-	const renderUser = (user, i) => <li key={`user-${i}`}>
-			<div className="user">
-				<img
-					alt='user avatar'
-					className="user-image"
-					src={`https://i.pravatar.cc/150?u=${user.socketID}`} />
-				<span>{user.name}</span>
-			</div>
-		</li> 
+	
     return (
 			<div className='quiz-bar'>
 				<h1>Quiz</h1>
 				<div className="users-list">
 						<ul className='users'>
-								{users.map((user, i) => renderUser(user, i))}
+								{users.map((user, i) => <User user={user} id={i} />)}
 						</ul>
 				</div>
 			</div>

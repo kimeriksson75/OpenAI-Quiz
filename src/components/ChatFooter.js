@@ -33,7 +33,7 @@ const ChatFooter = ({ socket, typingStatus, room }) => {
         <form className='form' onSubmit={handleSendMessage}>
           <input 
             type="text" 
-            placeholder='Surra på...' 
+            placeholder='Surra på eller ta en quiz...' 
             className='message' 
             value={message} 
             onChange={e => setMessage(e.target.value)}

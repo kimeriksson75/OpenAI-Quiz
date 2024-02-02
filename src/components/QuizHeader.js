@@ -21,7 +21,7 @@ const QuizHeader = ({ onInitQuiz, handleLeaveChat, room }) => {
 	}
 	return (
 		<header className='chat__mainHeader'>
-			<p>Surra på eller ta en quiz</p>
+			<p>{room.replace(/-/g, ' ' )}</p>
 			<div className="button-group">
 				<CopyToClipboard text={value} onCopy={() => onInvite()}>
 					<button className='button-primary'>{renderInviteText()}</button>

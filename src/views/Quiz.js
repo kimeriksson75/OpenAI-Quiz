@@ -111,10 +111,12 @@ const QuizView = (props) => {
 	}, [socket, messages, sendMessageSound, receiveMessageSound])
 
 	useEffect(()=> {
-	socket.on("typingResponse", data => setTypingStatus(data))
+		socket.on("typingResponse", data => {
+			console.log('typingResponse', data)
+			setTypingStatus(data)
+		})
 	}, [socket])
 
-	
 
 	useEffect(() => {
 	// 👇️ scroll to bottom every time messages change

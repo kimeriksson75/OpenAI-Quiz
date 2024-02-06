@@ -17,11 +17,11 @@ const QuizBar = ({ socket, room }) => {
 	
 	
     return (
-			<div className='quiz-bar'>
-					<ul className='users'>
-							{users.map((user, i) => <User user={user} id={i} />)}
-					</ul>
-			</div>
+		<div className='quiz-bar'>
+				<div className='users'>
+						{users.map((user, i) => <User user={user} id={i} />)}
+				</div>
+		</div>
     );
 }
 

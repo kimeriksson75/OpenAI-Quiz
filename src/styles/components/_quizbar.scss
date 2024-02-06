@@ -1,16 +1,13 @@
 .quiz-bar {
-	height: 100%;
-	margin: 0 0 0 $spacing-small;
-	padding: $spacing-small;
+	// padding: $spacing-small;
 	overflow-y: scroll;
 	width: $sidebar-width;
-	border: 1px dotted gray;
+	// border: 1px dotted gray;
+	// background-color: orange;
+	margin: 0 $spacing-small $spacing-small $spacing-small;
 
 	@media screen and (max-width: $tablet){
-		height: fit-content;
-		width: fit-content;
-		max-width: 100%;
-		margin-bottom: $spacing-small;
+		width: 80px;
 	}	
 
 	h1 {
@@ -21,10 +18,15 @@
 	display: flex;
 	gap: $spacing-small;
 	flex-direction: column;
-	margin: 0 auto;
+	justify-content: center;
+	align-items: center;
+	//padding: $spacing-small;
+
 	@media screen and (max-width: $tablet){
 		
-		flex-direction: row;
+		// flex-direction: row;
+		gap: $spacing-small;
+
 	}
 }
 // .users > * {

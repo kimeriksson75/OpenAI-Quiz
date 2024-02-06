@@ -15,9 +15,9 @@ const QuizHeader = ({ onInitQuiz, handleLeaveChat, room }) => {
 
 	const renderInviteText = () => {
 		if (copied) {
-			return 'Länk kopierad';
+			return 'Paste';
 		}
-		return 'Bjud in';
+		return 'Copy';
 	}
 	return (
 		<header className='quiz-header'>

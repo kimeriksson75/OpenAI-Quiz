@@ -14,7 +14,7 @@
 	flex: 1;
 	// padding-right: 12px;
     @media screen and (max-width: $tablet){
-		flex-direction: column;
+		// flex-direction: column;
 	}
 }
 
@@ -24,8 +24,7 @@
     width: 100%;
     height: 100%;
 
-    padding-left: 12px;
-    padding-right: 12px;
+    padding-right: $spacing-small;
     @media screen and (max-width: $tablet){
 	}
 }

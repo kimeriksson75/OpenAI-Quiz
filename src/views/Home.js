@@ -12,14 +12,16 @@ const Home = ({ socket }) => {
   const isFetching = useRef(false);
 
   const colors = [
-    '034732',
-    '008148',
-    'C6C013',
-    'EF8A17',
-    'EF2917',
-    '5B7B7A',
-    '565676',
-    '262626'
+    'C73E1D', // Red
+    '522A27', // Red dark
+    '2E5339', // Green
+    'E77728', // Orange
+    '684E32', // Brown
+    '034732', // Green dark
+    '0C1821', // Blue dark
+    '61304B', // Purple
+    '585123', // Olive
+    'FFBA08', // Yellow
   ];
   const handleSubmit = (e) => {
     e.preventDefault();

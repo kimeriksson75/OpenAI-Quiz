@@ -11,7 +11,7 @@
 	left: 0;
 	width: 100%;
 	height: 5px;
-	background-color: rgb(195, 195, 195);
+	border-top: 1px solid rgba(195, 195, 195, 0.3);
 }
 .quiz-question-bar {
 	position: relative;
@@ -32,6 +32,7 @@
 	position: absolute;
 	top: 0;
 	font-size: 11px;
+	font-weight: 600;
 
 	p {
 		float: right;

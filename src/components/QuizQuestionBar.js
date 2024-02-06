@@ -29,7 +29,7 @@ const QuizQuestionBar = ({ time, answerTime, roomAnswers }) => {
 								<p style={{
 									color: `#${color}`,
 									marginTop: `${(i + 1) * 14}px`
-								}}>{`${name.slice(0,2)} | ${userTime / 10}s`}</p>
+								}}>{`${name.slice(0,2)} - ${userTime / 10}s`}</p>
 							</div>
 						)
         	}

@@ -66,6 +66,7 @@ const QuizView = (props) => {
 
 	useEffect(() => {
 		socket.on('newQuiz', (data) => {
+			console.log('newQuiz', data);
 			setQuizData(data.quiz);
 			if (newQuizSound.current) {
 				newQuizSound.current.play();
@@ -123,22 +124,26 @@ const QuizView = (props) => {
 	
 	return (
 		<div className="quiz">
-			<QuizBar
-				socket={socket}
-				room={room}
-			/>
+			<QuizHeader
+					onInitQuiz={onInitQuiz}
+					handleLeaveChat={handleLeaveChat}
+					room={room}
+				/>
+			
 			{/* <Quiz socket={socket} /> */}
 			{quizData.length > 0 ?
 				<Quiz
 					onQuizFinished={onQuizFinished}
 					socket={socket}
-					quiz={quizData} /> : null}
+					quiz={quizData}
+					room={room}/> : null}
 			<div className="quiz-main">
-				<QuizHeader
-					onInitQuiz={onInitQuiz}
-					handleLeaveChat={handleLeaveChat}
+				<QuizBar
+					socket={socket}
 					room={room}
 				/>
+				<div className="quiz-chat">
+
 				<Chat
 					messages={messages}
 					lastMessageRef={lastMessageRef}
@@ -147,7 +152,8 @@ const QuizView = (props) => {
 					typingStatus={typingStatus}
 					socket={socket}
 					room={room}
-				/>
+					/>
+					</div>
 			</div>
 					
 		</div>

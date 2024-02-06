@@ -1,11 +1,11 @@
 .online__users > * {
-	margin-bottom: 10px;
+	margin-bottom: $spacing-small;
 	color: rgb(238, 102, 102);
 	font-style: italic;
 }
 
 .leaveChat__btn {
-	padding: 10px;
+	padding: $spacing-small;
 	width: 150px;
 	border: none;
 	outline: none;

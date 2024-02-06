@@ -2,7 +2,7 @@
 .button-primary,
 .button-secondary {
   background-color: #00e;
-  padding: 12px 24px;
+  padding: $spacing-small 24px;
   border: none;
   outline: none;
   color: white;
@@ -21,7 +21,7 @@
 
 .button-group {
 	display: flex;
-	gap: 12px;
+	gap: $spacing-small;
 }
 
 button:disabled {

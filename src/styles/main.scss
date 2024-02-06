@@ -1,4 +1,5 @@
 @import 'base/reset.scss';
+@import 'base/abstracts.scss';
 @import 'components/button.scss';
 @import 'components/modal.scss';
 @import 'components/quiz.scss';
@@ -8,5 +9,6 @@
 @import 'components/message.scss';
 @import 'components/header.scss';
 @import 'components/footer.scss';
+@import 'components/quiz-question-bar.scss';
 @import 'views/home.scss';
 @import 'views/quiz.scss';

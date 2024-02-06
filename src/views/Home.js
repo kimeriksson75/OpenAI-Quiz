@@ -11,20 +11,32 @@ const Home = ({ socket }) => {
   const [generateRoomName, setGenerateRoomName] = useState(room || null);
   const isFetching = useRef(false);
 
+  const colors = [
+    '034732',
+    '008148',
+    'C6C013',
+    'EF8A17',
+    'EF2917',
+    '5B7B7A',
+    '565676',
+    '262626'
+  ];
   const handleSubmit = (e) => {
     e.preventDefault();
     const { userName } = inputs
+    const color = colors[Math.floor(Math.random() * colors.length)];
     console.log('userName', userName);
 		localStorage.setItem('userName', userName);
+		localStorage.setItem('color', color);
     
     socket.connect({
       query: {
-        userName,
+        name: userName,
         socketID: socket.id,
         room: generateRoomName,
       }
     });
-    socket.emit('join', { name: userName, socketID: socket.id, room: generateRoomName});
+    socket.emit('join', { name: userName, color, socketID: socket.id, room: generateRoomName});
     navigate(`/quiz/${generateRoomName}`);
   };
 

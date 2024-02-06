@@ -2,19 +2,34 @@
 	margin: 30px 0 20px 0;
 }
 
-.chat__mainHeader {
+.quiz-header {
 	width: 100%;
-	padding: 12px 0;
+	padding: $spacing-small;
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
-	gap: 12px;
-
+	gap: $spacing-small;
+	margin-bottom: $spacing-small;
+	
+	
 	p {
-		margin-left: 12px;
+		margin-left: $spacing-small;
 	}
+	&:nth-child(1){
+		background-color: #f5f5f5;
+	}
+	
+}
 
-	@media screen and (max-width: 768px){
-		flex-direction: column-reverse;
-	}
+.quiz-header-content {
+	display: flex;
+	align-items: center;
+	justify-content: flex-end;
+	gap: $spacing-small;
+	width: 100%;
+}
+
+.quiz-logo {
+	margin-left: $spacing-small;
+	width: $sidebar-width;
 }

@@ -18,12 +18,9 @@ const QuizBar = ({ socket, room }) => {
 	
     return (
 			<div className='quiz-bar'>
-				<h1>Quiz</h1>
-				<div className="users-list">
-						<ul className='users'>
-								{users.map((user, i) => <User user={user} id={i} />)}
-						</ul>
-				</div>
+					<ul className='users'>
+							{users.map((user, i) => <User user={user} id={i} />)}
+					</ul>
 			</div>
     );
 }

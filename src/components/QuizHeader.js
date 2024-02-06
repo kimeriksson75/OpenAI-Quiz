@@ -20,14 +20,19 @@ const QuizHeader = ({ onInitQuiz, handleLeaveChat, room }) => {
 		return 'Bjud in';
 	}
 	return (
-		<header className='chat__mainHeader'>
-			<p>{room.replace(/-/g, ' ' )}</p>
-			<div className="button-group">
-				<CopyToClipboard text={value} onCopy={() => onInvite()}>
-					<button className='button-primary'>{renderInviteText()}</button>
-				</CopyToClipboard>
-				<button className='button-primary' onClick={onInitQuiz}>Quizza</button>
-				<button className='button-secondary' onClick={handleLeaveChat}>Hejdå!</button>
+		<header className='quiz-header'>
+			<div className='quiz-logo'>
+				<h1>Quiz</h1>
+			</div>
+			<div className="quiz-header-content">
+				{/* <p>{room.replace(/-/g, ' ' )}</p> */}
+				<div className="button-group">
+					<CopyToClipboard text={value} onCopy={() => onInvite()}>
+						<button className='button-primary'>{renderInviteText()}</button>
+					</CopyToClipboard>
+					<button className='button-primary' onClick={onInitQuiz}>Quizza</button>
+					<button className='button-secondary' onClick={handleLeaveChat}>Hejdå!</button>
+				</div>
 			</div>
 		</header>
 	)

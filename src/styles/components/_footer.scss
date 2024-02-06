@@ -1,5 +1,5 @@
 .chat__footer {
-	padding: 12px 0;
+	padding: $spacing-small 0;
 	position: relative;
 }
 
@@ -9,7 +9,7 @@
 	display: flex;
 	align-items: center;
 	justify-content: flex-start;
-	gap: 12px;
+	gap: $spacing-small;
 }
 
 .message {
@@ -18,7 +18,7 @@
 	border: 1px dotted gray;
 	outline: none;
 	font-size: 14px;
-	padding-left: 12px;
+	padding-left: $spacing-small;
 }
 
 .message__status {
@@ -28,5 +28,5 @@
 	font-size: 15px;
 	font-style: italic;
 	background-color: white;
-	padding: 8px 12px;
+	padding: 8px $spacing-small;
 }

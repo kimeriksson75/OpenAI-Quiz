@@ -8,7 +8,7 @@
 }
 
 .chat > * {
-	margin-bottom: 10px;
+	margin-bottom: $spacing-small;
 }
 
 .chat-wrapper {
@@ -20,7 +20,7 @@
 	border: 1px dotted gray;
 
 	max-width: 300px;
-	padding: 12px;
+	padding: $spacing-small;
 	// border-radius: 10px;
 	font-size: 15px;
 	animation: chat-bubble-animation 0.2s ease-out;
@@ -30,7 +30,7 @@
 	border: 1px dotted gray;
 
 	max-width: 300px;
-	padding: 12px;
+	padding: $spacing-small;
 	// border-radius: 10px;
 	margin-left: auto;
 	font-size: 15px;
@@ -43,11 +43,11 @@
 }
 .recipient__name {
 	text-align: left;
-	margin: 0 0 4px 12px;
+	margin: 0 0 4px $spacing-small;
 }
 .sender__name {
 	text-align: right;
-	margin: 0 12px 4px 0;
+	margin: 0 $spacing-small 4px 0;
 
 }
 

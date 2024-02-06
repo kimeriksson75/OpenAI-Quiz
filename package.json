@@ -2,6 +2,12 @@
   "name": "quiz",
   "version": "0.1.0",
   "private": true,
+  "license": "MIT",
+  "author": {
+    "name": "Kim Eriksson",
+    "email": "kimeriksson75@gmail.com"
+  },
+
   "dependencies": {
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^13.4.0",

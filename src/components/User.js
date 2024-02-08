@@ -11,7 +11,7 @@ const User = ({ user, id }) => {
 					className="user-image"
 					src={`https://i.pravatar.cc/150?u=${user.socketID}`} />
 				<div>
-				<p>{user.name.slice(0, 5)}</p>
+				<p>{user?.name?.slice(0, 5)}</p>
 				</div>
 			</div>
 	)

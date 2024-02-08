@@ -112,7 +112,7 @@ const QuizView = (props) => {
 		initiateQuiz.current = false;
 
 		socket.emit("quizFinished", {
-			result, 
+			result: {...result, category: quizData[0].category, maxPoints: quizData.length},
 			name: localStorage.getItem("userName"), 
 			id: `${socket.id}${Math.random()}`,
 			socketID: socket.id,

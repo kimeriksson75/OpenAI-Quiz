@@ -27,9 +27,8 @@ const Home = ({ socket }) => {
     e.preventDefault();
     const { userName } = inputs
     const color = colors[Math.floor(Math.random() * colors.length)];
-    console.log('userName', userName);
 		localStorage.setItem('userName', userName);
-		localStorage.setItem('color', color);
+    localStorage.setItem('color', color);
     
     socket.connect({
       query: {

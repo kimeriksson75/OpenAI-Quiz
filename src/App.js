@@ -5,7 +5,14 @@ import QuizView from './views/Quiz';
 import './styles/main.scss';
 
 const apiURL = process.env.REACT_APP_API_BASE_URL;
-const socket = socketIO.connect(apiURL);
+const socket = socketIO.connect(apiURL,
+  {
+    transports: ['websocket'],
+    reconnection: true,
+    reconnectionDelay: 500,
+    reconnectionAttempts: 10,
+  }
+);
 
 function App() {
   return (

@@ -1,4 +1,4 @@
-import React, { useRef, useEffect, useState } from 'react';
+import React, { useRef, useEffect, useState, useCallback } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import Quiz from '../components/Quiz';
 import QuizBar from '../components/QuizBar';
@@ -16,10 +16,12 @@ const QuizView = (props) => {
 	const { room } = useParams();
 	const [messages, setMessages] = useState([]);
 	const [typingStatus, setTypingStatus] = useState('');
+	const [isCategoryInput, setIsCategoryInput] = useState(false);
 	const lastMessageRef = useRef(null);
 	const [quizData, setQuizData] = useState([]);
 	const latestResponse = useRef(false);
 	const initiateQuiz = useRef(false);
+	const isRejoining = useRef(false);
 	const navigate = useNavigate();
 
 	const sendMessageSoundRef = useRef(null);
@@ -29,18 +31,46 @@ const QuizView = (props) => {
 	const { audio: receiveMessageSound } = useAudio(receivedMessageSoundFile, receivedMessageSoundRef);
 	const { audio: newQuizSound } = useAudio(newQuizSoundFile, newQuizSoundRef);
 
-	const onInitQuiz = () => {
+	useEffect(() => {
+
+		if (!localStorage.getItem('socketID') && socket?.id) {
+			localStorage.setItem('socketID', socket.id);
+		}
+
+		if (isRejoining.current) {
+			return;
+		}
+
+		isRejoining.current = true;
+		const socketID = localStorage.getItem('socketID');
+		const name = localStorage.getItem("userName");
+		const color = localStorage.getItem("color");
+		const messages = JSON.parse(localStorage.getItem('messages')) || [];
+		setMessages(messages);
+		
+		if (!name || !color) {
+			navigate(`/`);
+		}
+		socket.emit('join', {
+			name, 
+			color,
+			socketID,
+			room,
+		});
+	}, [socket]);
+
+	const onInitQuiz = useCallback(() => {
 		socket.emit("message", {
-				text: `Så ni är redo att quizza? Vilken kategori vill du köra på ${localStorage.getItem("userName")}?`, 
-				name: "Quizmaestro", 
-				id: `${socket.id}${Math.random()}`,
-				socketID: socket.id,
-				role: "admin",
-				type: "initiateQuiz",
-				room,
-			}
-		)
-	}
+			text: `Så ni är redo att quizza? Vilken kategori vill du köra på ${localStorage.getItem("userName")}?`,
+			name: "Quizmaestro",
+			id: `${socket.id}${Math.random()}`,
+			socketID: socket.id,
+			role: "admin",
+			type: "initiateQuiz",
+			room,
+		});
+		setIsCategoryInput(true);
+	},[setIsCategoryInput]);
 
 	const handleLeaveChat = () => {
 		socket.emit("message", {
@@ -54,11 +84,13 @@ const QuizView = (props) => {
 		})
 		socket.emit('leave', {
 			name: localStorage.getItem("userName"),
-			socketID: socket.id,
+			socketID: localStorage.getItem('socketID'),
 			room
 		});
-
+		localStorage.removeItem('socketID');
 		localStorage.removeItem('userName');
+		localStorage.removeItem('color');
+		localStorage.removeItem('messages');
     navigate(`/${room}`);
     window.location.reload();
   };
@@ -98,17 +130,21 @@ const QuizView = (props) => {
 			latestResponse.current = data;
 			if (sendMessageSound.current && receiveMessageSound.current) {
 				data.name === localStorage.getItem("userName") ?
-				sendMessageSound.current.play() :
-				receiveMessageSound.current.play();
+					sendMessageSound.current.play() :
+					receiveMessageSound.current.play();
 			}
 			
 			return () => {
 				socket.off("messageResponse")
 			}
 
-	})
+		})
 
-	}, [socket, messages, sendMessageSound, receiveMessageSound])
+	}, [socket, messages, sendMessageSound, receiveMessageSound]);
+
+	useEffect(() => { 
+		localStorage.setItem('messages', JSON.stringify(messages));
+	}, [messages]);
 
 	useEffect(()=> {
 		socket.on("typingResponse", data => {
@@ -154,6 +190,8 @@ const QuizView = (props) => {
 					typingStatus={typingStatus}
 					socket={socket}
 					room={room}
+					isCategoryInput={isCategoryInput}
+					setIsCategoryInput={setIsCategoryInput}
 					/>
 					</div>
 			</div>

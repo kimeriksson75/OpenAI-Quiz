@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-const ChatFooter = ({ socket, typingStatus, room }) => {
+const ChatFooter = ({ socket, typingStatus, room, isCategoryInput, setIsCategoryInput }) => {
     const [message, setMessage] = useState("")
     const handleTyping = () => socket.emit("typing", {
         message: `${localStorage.getItem("userName")} är på gång...`,
@@ -9,6 +9,9 @@ const ChatFooter = ({ socket, typingStatus, room }) => {
 
     const handleSendMessage = (e) => {
 			e.preventDefault()
+			if (isCategoryInput) {
+				setIsCategoryInput(false);
+			}
 			if (message.trim() && localStorage.getItem("userName")) {
 			socket.emit("typing", {
 				message: "",
@@ -38,14 +41,14 @@ const ChatFooter = ({ socket, typingStatus, room }) => {
         <form className='form' onSubmit={handleSendMessage}>
           <input 
             type="text" 
-            placeholder='Surra på eller ta en quiz...' 
+            placeholder={`${isCategoryInput ? 'Välj kategori' : 'Surra på eller ta en quiz...'}`} 
             className='message' 
             value={message} 
             onChange={e => setMessage(e.target.value)}
             onKeyDown={handleTyping}
             />
-            <button className="button-submit">Surra</button>
-        </form>
+				<button className="button-submit">{`${isCategoryInput ? 'Välj kategori' : 'Surra'}`}</button>
+			</form>
      </div>
   )
 };

@@ -2,6 +2,7 @@ import React, { useState, useEffect} from 'react';
 
 const QuizQuestionBar = ({ time, answerTime, roomAnswers }) => {
 	const [barWidth, setBarWidth] = useState(100);
+	const BAR_HEIGHT = 16;
 	useEffect(() => {
 			setBarWidth((time / answerTime) * 100);
 	}, [time, answerTime, setBarWidth]);
@@ -9,7 +10,7 @@ const QuizQuestionBar = ({ time, answerTime, roomAnswers }) => {
 	return (
 		<div
 			className="quiz-question-bar-container"
-			style={{ height: `${24 + (roomAnswers?.length * 14)}px` }}
+			style={{ height: `${24 + (roomAnswers?.length * BAR_HEIGHT)}px` }}
 		>
 			<div
 				className={`${barWidth === 100 ? 'quiz-question-bar-invisible' : 'quiz-question-bar'}`}
@@ -24,12 +25,12 @@ const QuizQuestionBar = ({ time, answerTime, roomAnswers }) => {
 									borderBottom: `2px solid #${color}`,
 									left: `${(userTime / answerTime) * answerTime}%`,
 									width: `${(answerTime - userTime)}%`,
-									height: `${(i + 1) * 14}px`
+									height: `${(i + 1) * BAR_HEIGHT}px`
 								}}>
 								<p style={{
 									color: `#${color}`,
-									marginTop: `${(i + 1) * 14}px`
-								}}>{`${name.slice(0,2)} - ${userTime / 10}s`}</p>
+									marginTop: `${(i + 1) * BAR_HEIGHT}px`
+								}}>{`${name} - ${(answerTime - userTime) / 10}s`}</p>
 							</div>
 						)
         	}

@@ -3,11 +3,11 @@ import useInteraction from './useInteraction';
 
 export default function useAudio(file = null, audio = null) {
   const interacted = useInteraction();
-	
+
   useEffect(() => {
-		async function createAudoContext() {
-			const { Howl } = await import('howler');
-			audio.current = new Howl({ src: [file] });
+    async function createAudoContext() {
+      const { Howl } = await import('howler');
+      audio.current = new Howl({ src: [file] });
     }
 
     if (interacted && file) {

@@ -1,32 +1,32 @@
 .quiz {
-	width: 100%;
-    max-width: $desktop;
-	height: 100dvh;
-    margin: 0 auto;
-	display: flex;
-    flex-direction: column;
-	align-items: center;
-    background-color: white;
+  width: 100%;
+  max-width: $desktop;
+  height: 100dvh;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: white;
 }
 
 .quiz-main {
-	display: flex;
-    width: 100%;
-	height: 90dvh;
-	flex: 1;
-	// padding-right: 12px;
-    @media screen and (max-width: $tablet){
-		// flex-direction: column;
-	}
+  display: flex;
+  width: 100%;
+  height: 90dvh;
+  flex: 1;
+  // padding-right: 12px;
+  @media screen and (max-width: $tablet) {
+    // flex-direction: column;
+  }
 }
 
 .quiz-chat {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    height: 100%;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
 
-    padding-right: $spacing-small;
-    @media screen and (max-width: $tablet){
-	}
+  padding-right: $spacing-small;
+  @media screen and (max-width: $tablet) {
+  }
 }

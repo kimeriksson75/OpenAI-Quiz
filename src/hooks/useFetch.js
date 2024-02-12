@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 import { useState, useEffect } from "react";
 
 export const useFetch = (url, category, ref, initialValue) => {
@@ -10,12 +11,12 @@ export const useFetch = (url, category, ref, initialValue) => {
       (async () => {
         try {
           const res = await fetch(url, {
-						method: "POST",
+            method: "POST",
             headers: {
               "Content-Type": "application/json",
               Accept: "application/json",
-						},
-						body: JSON.stringify({ category: category }),
+            },
+            body: JSON.stringify({ category }),
           });
           const resJson = await res.json();
           setData(resJson);

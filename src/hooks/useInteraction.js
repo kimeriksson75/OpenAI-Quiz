@@ -1,27 +1,27 @@
-import { useState, useEffect } from 'react';
+/* eslint-disable no-undef */
+import { useState, useEffect } from "react";
 
 export default function useInteraction() {
-    const [ready, setReady] = useState(false);
-    const events = ['mousedown', 'touchstart'];
+  const [ready, setReady] = useState(false);
+  const events = ["mousedown", "touchstart"];
 
-  
-    const listener = () => {
-      if (ready === false) {
-        setReady(true);
-      }
-    };
-  
-    useEffect(() => {
+  const listener = () => {
+    if (ready === false) {
+      setReady(true);
+    }
+  };
+
+  useEffect(() => {
+    events.forEach((event) => {
+      document.addEventListener(event, listener);
+    });
+
+    return () => {
       events.forEach((event) => {
-        document.addEventListener(event, listener);
+        document.removeEventListener(event, listener);
       });
-  
-      return () => {
-        events.forEach((event) => {
-          document.removeEventListener(event, listener);
-        });   
-      };
-    }, []);
-  
-    return ready;
-  }
+    };
+  }, []);
+
+  return ready;
+}

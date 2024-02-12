@@ -1,39 +1,35 @@
 .quiz-bar {
-	// padding: $spacing-small;
-	overflow-y: scroll;
-	width: $sidebar-width;
-	border: 1px dotted gray;
-	// background-color: orange;
-	margin: 0 $spacing-small $spacing-small $spacing-small;
+  // padding: $spacing-small;
+  overflow-y: scroll;
+  width: $sidebar-width;
+  border: 1px dotted gray;
+  // background-color: orange;
+  margin: 0 $spacing-small $spacing-small $spacing-small;
 
-	@media screen and (max-width: $tablet){
-		width: 80px;
-	}	
+  @media screen and (max-width: $tablet) {
+    width: 80px;
+  }
 
-	h1 {
-		text-align: center;
-	}
+  h1 {
+    text-align: center;
+  }
 }
 .users {
-	display: flex;
-	gap: $spacing-small;
-	flex-direction: column;
-	justify-content: center;
-	align-items: center;
-	//padding: $spacing-small;
+  display: flex;
+  gap: $spacing-small;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  //padding: $spacing-small;
 
-	@media screen and (max-width: $tablet){
-		
-		// flex-direction: row;
-		gap: $spacing-small;
-
-	}
+  @media screen and (max-width: $tablet) {
+    // flex-direction: row;
+    gap: $spacing-small;
+  }
 }
 // .users > * {
 // 	margin-bottom: 10px;
 // 	color: #607eaa;
 // 	font-size: 14px;
-	
-// }
 
-  
+// }

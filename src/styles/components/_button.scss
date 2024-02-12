@@ -8,7 +8,7 @@
   color: white;
   cursor: pointer;
   font-size: 14px;
-	font-weight: bold;
+  font-weight: bold;
   text-wrap: nowrap;
 }
 .button-primary:hover,
@@ -21,12 +21,12 @@
 }
 
 .button-group {
-	display: flex;
-	gap: $spacing-small;
+  display: flex;
+  gap: $spacing-small;
 }
 
 button:disabled {
-	background-color: #ccc;
-	color: #666;
-	cursor: not-allowed;
+  background-color: #ccc;
+  color: #666;
+  cursor: not-allowed;
 }

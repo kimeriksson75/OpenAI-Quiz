@@ -154,7 +154,7 @@ function QuizView(props) {
   }, [socket, messages, sendMessageSound, receiveMessageSound]);
 
   return (
-    <div className="quiz">
+    <main className="quiz">
       <QuizHeader
         onInitQuiz={onInitQuiz}
         handleLeaveChat={handleLeaveChat}
@@ -170,7 +170,7 @@ function QuizView(props) {
           room={room}
         />
       ) : null}
-      <div className="quiz-main">
+      <section className="quiz-main">
         <QuizBar socket={socket} room={room} />
         <div className="quiz-chat">
           <Chat messages={messages} lastMessageRef={lastMessageRef} />
@@ -182,8 +182,8 @@ function QuizView(props) {
             setIsCategoryInput={setIsCategoryInput}
           />
         </div>
-      </div>
-    </div>
+      </section>
+    </main>
   );
 }
 

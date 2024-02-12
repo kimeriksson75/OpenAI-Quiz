@@ -18,13 +18,13 @@ function QuizBar({ socket }) {
   }, [socket, users, newUserSound]);
 
   return (
-    <div className="quiz-bar">
+    <aside className="quiz-bar">
       <div className="users">
         {users.map((user, i) => (
           <User key={`user-${i}`} user={user} id={i} />
         ))}
       </div>
-    </div>
+    </aside>
   );
 }
 

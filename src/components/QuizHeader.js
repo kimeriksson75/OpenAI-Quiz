@@ -27,7 +27,7 @@ function QuizHeader({ onInitQuiz, handleLeaveChat, room }) {
       <div className="quiz-logo">
         <h1>Quiz</h1>
       </div>
-      <div className="quiz-header-content">
+      <nav className="quiz-header-content">
         {/* <p>{room.replace(/-/g, ' ' )}</p> */}
         <div className="button-group">
           <CopyToClipboard text={value} onCopy={() => onInvite()}>
@@ -40,7 +40,7 @@ function QuizHeader({ onInitQuiz, handleLeaveChat, room }) {
             Hejdå!
           </button>
         </div>
-      </div>
+      </nav>
     </header>
   );
 }

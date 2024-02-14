@@ -1,11 +1,11 @@
 .button-submit,
 .button-primary,
 .button-secondary {
-  background-color: #00e;
+  background-color: $primary-color;
   padding: $spacing-small 24px;
   border: none;
   outline: none;
-  color: white;
+  color: $light-color;
   cursor: pointer;
   font-size: 14px;
   font-weight: bold;
@@ -13,11 +13,11 @@
 }
 .button-primary:hover,
 .button-submit:hover {
-  background-color: #00e;
+  background-color: $primary-color;
 }
 
 .button-secondary {
-  background-color: #d1512d;
+  background-color: $tertiary-color;
 }
 
 .button-group {
@@ -27,6 +27,6 @@
 
 button:disabled {
   background-color: #ccc;
-  color: #666;
+  color: $secondary-color;
   cursor: not-allowed;
 }

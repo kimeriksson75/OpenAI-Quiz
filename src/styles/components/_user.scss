@@ -6,13 +6,13 @@
   width: 100%;
   cursor: pointer;
   transition: all 0.3s ease-in-out;
-  border: 1px dotted gray;
+  border: 1px dotted $secondary-color;
   color: black;
   animation: user-animation 0.2s ease-out;
 
   p {
     font-size: 12px;
-    background-color: white;
+    background-color: $light-color;
     padding: 0 2px;
     margin-top: $spacing-small;
   }
@@ -26,7 +26,7 @@
   width: auto;
   height: auto;
   overflow: visible;
-  border: 2px solid white;
+  border: 2px solid $light-color;
 
   @media screen and (max-width: $tablet) {
     width: 100%;

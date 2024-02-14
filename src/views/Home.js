@@ -1,15 +1,18 @@
 /* eslint-disable no-undef */
-import React, { useEffect, useRef, useState } from "react";
-import PropTypes from "prop-types";
+import React, { useEffect, useRef, useState, useContext } from "react";
+import { SocketContext } from "../context/socket";
 import { useNavigate, useParams } from "react-router-dom";
+import Header from "../components/Header";
 
-function Home({ socket }) {
+function Home() {
+  const socket = useContext(SocketContext);
   const { room = null } = useParams();
   const navigate = useNavigate();
   const [inputs, setInputs] = useState({});
   const [errors] = useState({});
   const [generateRoomName, setGenerateRoomName] = useState(room || null);
   const isFetching = useRef(false);
+  const [returningUser, setReturningUser] = useState("");
 
   const colors = [
     "C73E1D", // Red
@@ -64,55 +67,54 @@ function Home({ socket }) {
     }
   }, [socket, generateRoomName, setGenerateRoomName, isFetching]);
 
+  useEffect(() => {
+    if (localStorage.getItem("userName")) {
+      setReturningUser(localStorage.getItem("userName"));
+    }
+  }, [localStorage]);
   return (
     <div className="home">
-      <header className="home-header" />
-      <div className="home-login-form">
-        <h1 className="">Hej,</h1>
-        {generateRoomName ? (
-          <div>
-            <p className="">du kommer ansluta till rum</p>
-            <h4>{generateRoomName}.</h4>
-            <div className="divider" />
-          </div>
-        ) : (
-          <p>Genererar ett rum för din quiz, hold on.</p>
-        )}
-        <form onSubmit={handleSubmit}>
-          <label htmlFor="userName">ditt namn tack</label>
-          <input
-            placeholder="Ann-Sofie t ex"
-            className={`input ${errors.userName ? "error" : ""}`}
-            onChange={onHandleChange}
-            name="userName"
-            id="userName"
-            data-testid="userName"
-            label="Användarnamn:"
-            value={inputs.userName || ""}
-            type="text"
-          />
-          <div className="form error-message">
-            {errors.userName ? errors.userName : null}
-          </div>
-          <button
-            type="submit"
-            disabled={!generateRoomName}
-            className="button-submit"
-          >
-            Börja Quiz
-          </button>
-        </form>
-      </div>
+      <Header />
+      <main className="home-content">
+        <div className="home-login-form">
+          <h1 className="">Hej,</h1>
+          {generateRoomName ? (
+            <div>
+              <p className="">du kommer ansluta till rum</p>
+              <h4>{generateRoomName}.</h4>
+              <div className="divider" />
+            </div>
+          ) : (
+            <p>Genererar ett rum för din quiz, hold on.</p>
+          )}
+          <form onSubmit={handleSubmit}>
+            <label htmlFor="userName">ditt namn tack</label>
+            <input
+              placeholder="Ann-Sofie t ex"
+              className={`input ${errors.userName ? "error" : ""}`}
+              onChange={onHandleChange}
+              name="userName"
+              id="userName"
+              data-testid="userName"
+              label="Användarnamn:"
+              value={inputs.userName || returningUser || ""}
+              type="text"
+            />
+            <div className="form error-message">
+              {errors.userName ? errors.userName : null}
+            </div>
+            <button
+              type="submit"
+              disabled={!generateRoomName}
+              className="button-submit"
+            >
+              Kör på!
+            </button>
+          </form>
+        </div>
+      </main>
     </div>
   );
 }
 
-Home.propTypes = {
-  socket: PropTypes.shape({
-    id: PropTypes.string,
-    on: PropTypes.func.isRequired,
-    connect: PropTypes.func.isRequired,
-    emit: PropTypes.func.isRequired,
-  }).isRequired,
-};
 export default Home;

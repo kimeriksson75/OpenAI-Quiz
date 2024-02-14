@@ -1,29 +1,20 @@
-/* eslint-disable no-undef */
 import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import socketIO from "socket.io-client";
+import { SocketContext, socket } from "./context/socket";
 import Home from "./views/Home";
 import QuizView from "./views/Quiz";
 import "./styles/main.scss";
 
-const apiURL = process.env.REACT_APP_API_BASE_URL;
-const socket = socketIO.connect(apiURL, {
-  transports: ["websocket"],
-  reconnection: true,
-  reconnectionDelay: 500,
-  reconnectionAttempts: 10,
-});
-
 function App() {
   return (
     <BrowserRouter>
-      <div>
+      <SocketContext.Provider value={socket}>
         <Routes>
-          <Route path="/" element={<Home socket={socket} />} />
-          <Route path="/:room" element={<Home socket={socket} />} />
-          <Route path="/quiz/:room" element={<QuizView socket={socket} />} />
+          <Route path="/" element={<Home />} />
+          <Route path="/:room" element={<Home />} />
+          <Route path="/quiz/:room" element={<QuizView />} />
         </Routes>
-      </div>
+      </SocketContext.Provider>
     </BrowserRouter>
   );
 }

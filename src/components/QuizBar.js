@@ -1,13 +1,13 @@
 /* eslint-disable no-undef */
-import React, { useState, useEffect, useRef } from "react";
-import PropTypes from "prop-types";
+import React, { useState, useEffect, useRef, useContext } from "react";
+import { SocketContext } from "../context/socket";
 import User from "./User";
 import useAudio from "../hooks/useAudio";
 
-function QuizBar({ socket }) {
+function QuizBar() {
   const [users, setUsers] = useState([]);
+  const socket = useContext(SocketContext);
   const newUserSoundFile = require("../assets/sounds/chat-new-user.mp3");
-
   const newUserSoundRef = useRef(null);
   const { audio: newUserSound } = useAudio(newUserSoundFile, newUserSoundRef);
   useEffect(() => {
@@ -27,14 +27,5 @@ function QuizBar({ socket }) {
     </aside>
   );
 }
-
-QuizBar.propTypes = {
-  socket: PropTypes.shape({
-    id: PropTypes.string,
-    on: PropTypes.func.isRequired,
-    connect: PropTypes.func.isRequired,
-    emit: PropTypes.func.isRequired,
-  }).isRequired,
-};
 
 export default QuizBar;

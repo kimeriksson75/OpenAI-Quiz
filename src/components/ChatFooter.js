@@ -1,15 +1,16 @@
 /* eslint-disable no-undef */
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import PropTypes from "prop-types";
+import { SocketContext } from "../context/socket";
 
 function ChatFooter({
-  socket,
   typingStatus,
   room,
   isCategoryInput,
   setIsCategoryInput,
 }) {
   const [message, setMessage] = useState("");
+  const socket = useContext(SocketContext);
   const handleTyping = () =>
     socket.emit("typing", {
       message: `${localStorage.getItem("userName")} är på gång...`,
@@ -70,12 +71,6 @@ ChatFooter.propTypes = {
   room: PropTypes.string,
   isCategoryInput: PropTypes.bool,
   setIsCategoryInput: PropTypes.func,
-  socket: PropTypes.shape({
-    id: PropTypes.string,
-    on: PropTypes.func.isRequired,
-    connect: PropTypes.func.isRequired,
-    emit: PropTypes.func.isRequired,
-  }).isRequired,
   messages: PropTypes.shape([
     {
       message: PropTypes.string.isRequired,

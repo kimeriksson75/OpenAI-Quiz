@@ -1,11 +1,19 @@
 /* eslint-disable no-undef */
-import React, { useRef, useEffect, useState, useCallback } from "react";
+import React, {
+  useRef,
+  useEffect,
+  useState,
+  useCallback,
+  useContext,
+} from "react";
 import PropTypes from "prop-types";
+import { SocketContext } from "../context/socket";
 import QuizQuestionBar from "./QuizQuestionBar";
 import Modal from "./Modal";
 function Quiz(props) {
+  const { quiz = [], onQuizFinished, room } = props;
+  const socket = useContext(SocketContext);
   const QUIZ_ANSWER_TIME = 100;
-  const { socket, quiz = [], onQuizFinished, room } = props;
   const [answers, setAnswers] = useState([]);
   const [roomAnswers, setRoomAnswers] = useState([]);
   const [started, setStarted] = useState(false);
@@ -193,11 +201,5 @@ Quiz.propTypes = {
   room: PropTypes.string,
   quiz: PropTypes.array.isRequired,
   onQuizFinished: PropTypes.func,
-  socket: PropTypes.shape({
-    id: PropTypes.string,
-    on: PropTypes.func.isRequired,
-    connect: PropTypes.func.isRequired,
-    emit: PropTypes.func.isRequired,
-  }).isRequired,
 };
 export default Quiz;

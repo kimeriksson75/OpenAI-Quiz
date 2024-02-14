@@ -1,8 +1,16 @@
 /* eslint-disable no-undef */
-import React from "react";
+import React, { useEffect } from "react";
 import PropTypes from "prop-types";
 
 function Chat({ messages, lastMessageRef }) {
+  const scrollToBottom = () => {
+    lastMessageRef.current?.scrollIntoView();
+  };
+
+  useEffect(() => {
+    scrollToBottom();
+  }, [messages]);
+
   return (
     <div className="chat">
       {messages.map((message) =>
@@ -28,7 +36,10 @@ function Chat({ messages, lastMessageRef }) {
 }
 
 Chat.propTypes = {
-  messages: PropTypes.array,
-  lastMessageRef: PropTypes.object,
+  messages: PropTypes.arrayOf(PropTypes.object),
+  lastMessageRef: PropTypes.oneOfType([
+    PropTypes.func,
+    PropTypes.shape({ current: PropTypes.any }),
+  ]),
 };
 export default Chat;

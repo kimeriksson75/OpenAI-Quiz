@@ -1,8 +1,12 @@
 /* eslint-disable no-undef */
-
-import React, { useRef, useEffect, useState, useCallback } from "react";
-import PropTypes from "prop-types";
-
+import React, {
+  useRef,
+  useEffect,
+  useState,
+  useCallback,
+  useContext,
+} from "react";
+import { SocketContext } from "../context/socket";
 import { useParams, useNavigate } from "react-router-dom";
 import Quiz from "../components/Quiz";
 import QuizBar from "../components/QuizBar";
@@ -10,16 +14,18 @@ import QuizHeader from "../components/QuizHeader";
 import ChatFooter from "../components/ChatFooter";
 import Chat from "../components/Chat";
 import useAudio from "../hooks/useAudio";
+import quizSchema from "../utils/validation/quiz-schema";
+import { message, quizFinished, onError, leave } from "../utils/socketBridge";
 
 const sendMessageSoundFile = require("../assets/sounds/chat-pop.mp3");
 const receivedMessageSoundFile = require("../assets/sounds/chat-received-pop.mp3");
 const newQuizSoundFile = require("../assets/sounds/new-quiz.mp3");
 
-function QuizView(props) {
-  const { socket } = props;
+function QuizView() {
+  const socket = useContext(SocketContext);
   const { room } = useParams();
   const [messages, setMessages] = useState([]);
-  const [typingStatus] = useState("");
+  const [typingStatus, setTypingStatus] = useState("");
   const [isCategoryInput, setIsCategoryInput] = useState(false);
   const lastMessageRef = useRef(null);
   const [quizData, setQuizData] = useState([]);
@@ -51,14 +57,17 @@ function QuizView(props) {
     }
 
     isRejoining.current = true;
-    const socketID = localStorage.getItem("socketID");
-    const name = localStorage.getItem("userName");
-    const color = localStorage.getItem("color");
+    const socketID = localStorage.getItem("socketID") || null;
+    const name = localStorage.getItem("userName") || "";
+    const color = localStorage.getItem("color") || "";
     const messages = JSON.parse(localStorage.getItem("messages")) || [];
+    console.log("name", name);
+    console.log("color", color);
+    console.log("messages", messages);
     setMessages(messages);
 
-    if (!name || !color) {
-      navigate("/");
+    if (!name || !color || !socketID) {
+      return;
     }
     socket.emit("join", {
       name,
@@ -69,13 +78,12 @@ function QuizView(props) {
   }, [socket]);
 
   const onInitQuiz = useCallback(() => {
-    socket.emit("message", {
+    message({
+      socket,
       text: `Så ni är redo att quizza? Vilken kategori vill du köra på ${localStorage.getItem(
         "userName"
       )}?`,
       name: "Quizmaestro",
-      id: `${socket.id}${Math.random()}`,
-      socketID: socket.id,
       role: "admin",
       type: "initiateQuiz",
       room,
@@ -84,20 +92,26 @@ function QuizView(props) {
   }, [setIsCategoryInput]);
 
   const handleLeaveChat = () => {
-    socket.emit("message", {
+    message({
+      socket,
       text: "Skjuter ut mig, hörs vi 🌴",
       name: localStorage.getItem("userName"),
-      id: `${socket.id}${Math.random()}`,
-      socketID: socket.id,
       role: "user",
       type: "message",
       room,
     });
-    socket.emit("leave", {
+    message({
+      socket,
+      text: "Skjuter ut mig, hörs vi 🌴",
       name: localStorage.getItem("userName"),
-      socketID: localStorage.getItem("socketID"),
       room,
     });
+    leave({
+      socket,
+      name: localStorage.getItem("userName"),
+      room,
+    });
+
     localStorage.removeItem("socketID");
     localStorage.removeItem("userName");
     localStorage.removeItem("color");
@@ -106,8 +120,26 @@ function QuizView(props) {
     window.location.reload();
   };
 
+  const validateQuiz = (quiz) => {
+    const { error } = quizSchema.validate(quiz);
+    if (error) {
+      console.error(error);
+      return false;
+    }
+    return true;
+  };
+
   useEffect(() => {
     socket.on("newQuiz", (data) => {
+      if (!validateQuiz(data.quiz)) {
+        onError({
+          socket,
+          text: "🔥 Ojoj, något gick fel med quizzet. Försök igen!",
+          name: "Quizmaestro",
+          room,
+        });
+        return;
+      }
       setQuizData(data.quiz);
       if (newQuizSound.current) {
         newQuizSound.current.play();
@@ -116,24 +148,21 @@ function QuizView(props) {
   }, [socket, newQuizSound]);
 
   const onQuizFinished = (result) => {
-    console.log("onQuizFinished");
     setQuizData([]);
     initiateQuiz.current = false;
-
-    socket.emit("quizFinished", {
-      result: {
-        ...result,
-        category: quizData[0].category,
-        maxPoints: quizData.length,
-      },
+    const extendedResult = {
+      ...result,
+      category: quizData[0].category,
+      maxPoints: quizData.length,
+    };
+    quizFinished({
+      socket,
+      result: extendedResult,
       name: localStorage.getItem("userName"),
-      id: `${socket.id}${Math.random()}`,
-      socketID: socket.id,
-      role: "user",
-      type: "result",
       room,
     });
   };
+
   useEffect(() => {
     socket.on("messageResponse", (data) => {
       setMessages([...messages, data]);
@@ -153,8 +182,21 @@ function QuizView(props) {
     });
   }, [socket, messages, sendMessageSound, receiveMessageSound]);
 
+  useEffect(() => {
+    localStorage.setItem("messages", JSON.stringify(messages));
+  }, [messages]);
+
+  useEffect(() => {
+    socket.on("typingResponse", (data) => {
+      if (data) {
+        setTypingStatus(data);
+      } else {
+        setTypingStatus("");
+      }
+    });
+  }, [socket]);
   return (
-    <main className="quiz">
+    <div className="quiz">
       <QuizHeader
         onInitQuiz={onInitQuiz}
         handleLeaveChat={handleLeaveChat}
@@ -163,38 +205,22 @@ function QuizView(props) {
 
       {/* <Quiz socket={socket} /> */}
       {quizData.length > 0 ? (
-        <Quiz
-          onQuizFinished={onQuizFinished}
-          socket={socket}
-          quiz={quizData}
-          room={room}
-        />
+        <Quiz onQuizFinished={onQuizFinished} quiz={quizData} room={room} />
       ) : null}
-      <section className="quiz-main">
-        <QuizBar socket={socket} room={room} />
+      <main className="quiz-main">
+        <QuizBar room={room} />
         <div className="quiz-chat">
           <Chat messages={messages} lastMessageRef={lastMessageRef} />
           <ChatFooter
             typingStatus={typingStatus}
-            socket={socket}
             room={room}
             isCategoryInput={isCategoryInput}
             setIsCategoryInput={setIsCategoryInput}
           />
         </div>
-      </section>
-    </main>
+      </main>
+    </div>
   );
 }
-
-QuizView.propTypes = {
-  socket: PropTypes.shape({
-    id: PropTypes.string,
-    on: PropTypes.func.isRequired,
-    off: PropTypes.func.isRequired,
-    connect: PropTypes.func.isRequired,
-    emit: PropTypes.func.isRequired,
-  }).isRequired,
-};
 
 export default QuizView;

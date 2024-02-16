@@ -14,11 +14,15 @@
   align-items: center;
 }
 .home-login-form {
-  border: 1px dotted $secondary-color;
+  border: $border-secondary;
   padding: 32px 24px;
-
   h2 {
-    margin-bottom: 24px;
+    font-family: "Bungee Shade", sans-serif;
+  }
+  h4 {
+    // font-family: "Bungee Shade", sans-serif;
+    color: $color-tertiary;
+    text-transform: capitalize;
   }
 
   form {
@@ -29,7 +33,7 @@
 
     input {
       padding: 10px;
-      border: 1px dotted $secondary-color;
+      border: $border-secondary;
       outline: none;
     }
   }

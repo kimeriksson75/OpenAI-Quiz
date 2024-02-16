@@ -1,6 +1,14 @@
 .quiz-component {
   transition: all 0.3s ease-in-out;
 
+  h1 {
+    font-family: "Bungee Shade", sans-serif;
+  }
+
+  h4 {
+    color: $color-tertiary;
+  }
+
   button {
     margin-top: 20px;
     padding: 10px;
@@ -11,7 +19,7 @@
     border: none;
     background-color: $light-color;
     color: black;
-    border: 1px dotted $secondary-color;
+    border: $border-secondary;
     transition: all 0.5s ease-in-out;
   }
   button:hover {
@@ -42,9 +50,9 @@
   }
 
   .button-wrong {
-    background-color: $tertiary-color;
+    background-color: $color-tertiary;
     color: $light-color;
-    border: 1px solid $tertiary-color;
+    border: 1px solid $color-tertiary;
   }
 }
 

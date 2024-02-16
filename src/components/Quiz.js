@@ -163,7 +163,7 @@ function Quiz(props) {
     <Modal showModal={true}>
       <div className="quiz-component">
         <h1>Quiz</h1>
-        <h3>{`${quiz[0]?.category}`}</h3>
+        <h4>{`${quiz[0]?.category}`}</h4>
         {!started ? (
           <p>Väntar på att quizet ska starta</p>
         ) : (

@@ -7,8 +7,10 @@ $spacing-large: 24px;
 $desktop: 1024px;
 $tablet: 512px;
 
-$primary-color: #00e;
-$secondary-color: gray;
-$tertiary-color: #d1512d;
-$quaternary-color: #218a40;
+$color-primary: #00e;
+$color-secondary: gray;
+$color-tertiary: #d1512d;
+$color-quaternary: #218a40;
 $light-color: #fff;
+
+$border-secondary: 1px dotted $color-secondary;

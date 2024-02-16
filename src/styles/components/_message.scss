@@ -4,7 +4,7 @@
   background-color: $light-color;
   padding: 20px;
   overflow-y: scroll;
-  border: 1px dotted $secondary-color;
+  border: $border-secondary;
 }
 
 .chat > * {
@@ -17,7 +17,7 @@
 
 .message__recipient {
   background-color: rgb(239, 239, 239);
-  border: 1px dotted $secondary-color;
+  border: $border-secondary;
 
   max-width: 300px;
   padding: $spacing-small;
@@ -27,7 +27,7 @@
 }
 .message__sender {
   // background-color: rgb(194, 243, 194);
-  border: 1px dotted $secondary-color;
+  border: $border-secondary;
 
   max-width: 300px;
   padding: $spacing-small;

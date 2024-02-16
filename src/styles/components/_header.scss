@@ -9,14 +9,18 @@
 
   a {
     text-decoration: none;
-    font-size: 42px;
+    font-size: 38px;
     font-weight: bold;
-    color: $primary-color;
-    font-family: "Arial";
+    color: $color-primary;
+    font-family: "Honk", system-ui;
+    font-family: "Bungee Shade", sans-serif;
+    @media screen and (max-width: $tablet) {
+      font-size: 30px;
+    }
   }
 }
 .header {
-  border-bottom: 1px dotted $secondary-color;
+  border-bottom: 1px dotted $color-secondary;
 }
 .quiz-header {
   p {

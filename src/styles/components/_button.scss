@@ -1,23 +1,25 @@
 .button-submit,
 .button-primary,
 .button-secondary {
-  background-color: $primary-color;
+  background-color: $color-primary;
   padding: $spacing-small 24px;
   border: none;
   outline: none;
   color: $light-color;
   cursor: pointer;
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+    monospace;
   font-size: 14px;
   font-weight: bold;
   text-wrap: nowrap;
 }
 .button-primary:hover,
 .button-submit:hover {
-  background-color: $primary-color;
+  background-color: $color-primary;
 }
 
 .button-secondary {
-  background-color: $tertiary-color;
+  background-color: $color-tertiary;
 }
 
 .button-group {
@@ -27,6 +29,6 @@
 
 button:disabled {
   background-color: #ccc;
-  color: $secondary-color;
+  color: $color-secondary;
   cursor: not-allowed;
 }

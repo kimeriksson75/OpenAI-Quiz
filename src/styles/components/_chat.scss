@@ -1,6 +1,6 @@
 .online__users > * {
   margin-bottom: $spacing-small;
-  color: $tertiary-color;
+  color: $color-tertiary;
   font-style: italic;
 }
 
@@ -9,7 +9,7 @@
   width: 150px;
   border: none;
   outline: none;
-  background-color: $tertiary-color;
+  background-color: $color-tertiary;
   cursor: pointer;
   color: $light-color;
 }

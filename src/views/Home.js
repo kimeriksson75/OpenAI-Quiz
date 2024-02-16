@@ -77,11 +77,11 @@ function Home() {
       <Header />
       <main className="home-content">
         <div className="home-login-form">
-          <h1 className="">Hej,</h1>
+          <h2 className="">Hej,</h2>
           {generateRoomName ? (
             <div>
               <p className="">du kommer ansluta till rum</p>
-              <h4>{generateRoomName}.</h4>
+              <h4>{generateRoomName.replace(/-/g, " ")}</h4>
               <div className="divider" />
             </div>
           ) : (

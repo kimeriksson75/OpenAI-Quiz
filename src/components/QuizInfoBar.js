@@ -7,9 +7,7 @@ const QuizInfoBar = ({ room }) => {
   }
   return (
     <div className="quiz-infobar">
-      <h4>
-        Rum <span>{room.replace(/-/g, " ")}</span>
-      </h4>
+      <h4>{room.replace(/-/g, " ")}</h4>
     </div>
   );
 };

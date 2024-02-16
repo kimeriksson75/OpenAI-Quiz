@@ -14,6 +14,7 @@ function User({ user }) {
       <img
         alt="user avatar"
         className="user-image"
+        loading="lazy"
         src={`https://i.pravatar.cc/150?u=${user.socketID}`}
       />
       <div>

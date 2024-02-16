@@ -11,6 +11,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import Quiz from "../components/Quiz";
 import QuizBar from "../components/QuizBar";
 import QuizHeader from "../components/QuizHeader";
+import QuizInfoBar from "../components/QuizInfoBar";
 import ChatFooter from "../components/ChatFooter";
 import Chat from "../components/Chat";
 import useAudio from "../hooks/useAudio";
@@ -202,6 +203,7 @@ function QuizView() {
         handleLeaveChat={handleLeaveChat}
         room={room}
       />
+      <QuizInfoBar room={room} />
 
       {/* <Quiz socket={socket} /> */}
       {quizData.length > 0 ? (

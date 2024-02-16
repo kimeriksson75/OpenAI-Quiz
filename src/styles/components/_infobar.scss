@@ -1,0 +1,14 @@
+.quiz-infobar {
+  width: 100%;
+  display: flex;
+  justify-content: flex-start;
+  padding: 0 $spacing-small $spacing-small $spacing-small;
+
+  h4,
+  span {
+    color: $primary-color;
+  }
+  span {
+    text-transform: capitalize;
+  }
+}

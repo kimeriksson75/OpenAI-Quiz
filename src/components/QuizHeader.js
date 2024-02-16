@@ -28,7 +28,6 @@ function QuizHeader({ onInitQuiz, handleLeaveChat, room }) {
         <a href={`/${room}`}>Quiz</a>
       </div>
       <nav className="quiz-header-content">
-        {/* <p>{room.replace(/-/g, " ")}</p> */}
         <div className="button-group">
           <CopyToClipboard text={value} onCopy={() => onInvite()}>
             <button className="button-primary">{renderInviteText()}</button>

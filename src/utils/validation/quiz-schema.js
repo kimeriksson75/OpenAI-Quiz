@@ -6,6 +6,7 @@ const quizSchema = Joi.array().items(
     question: Joi.string().required(),
     answers: Joi.array().items(Joi.string()).required(),
     correctAnswer: Joi.string().required(),
+    difficulty: Joi.string().valid("easy", "medium", "hard"),
   })
 );
 
